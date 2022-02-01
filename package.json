@@ -30,7 +30,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "mocha --timeout 10000 --exit dist/test/*.js",
+    "test": "mocha --timeout 30000 --exit dist/test/*.js",
     "build": "tsc",
     "prepublish": "tsc"
   },

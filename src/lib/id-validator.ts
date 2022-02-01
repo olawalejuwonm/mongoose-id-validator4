@@ -2,6 +2,14 @@ import mongoose from "mongoose";
 import traverse from "traverse";
 import clone from "clone";
 
+declare class IdValidator {
+  enabled: boolean;
+  enable: () => void;
+  disable: () => void;
+  validate: (schema: any, options: any) => any;
+  validateSchema: (schema: any, message?: any, connection?: any, allowDuplicates?: any) => any;
+}
+
 function IdValidator(this: any) {
   this.enabled = true;
 }
