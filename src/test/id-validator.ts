@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import validator from "../lib/id-validator";
+import validator from "..";
 import async from "async";
 import should from "should";
-import { getConstructor as IdValidator } from "../lib/id-validator";
+import { getConstructor as IdValidator } from "..";
 
 const Schema = mongoose.Schema;
 
