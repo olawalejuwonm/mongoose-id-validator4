@@ -1,44 +1,54 @@
 {
-    "name": "mongoose-id-validator",
-    "version": "0.6.0",
-    "description": "Mongoose plugin to validate that ObjectID references refer to objects that actually exist in the referenced collection",
-    "author": {
-        "name": "Martin Campbell",
-        "email": "martin@campbellsoftware.co.uk",
-        "url": "http://www.campbellsoftware.co.uk"
-    },
-    "keywords": [
-        "mongoose",
-        "objectid",
-        "id",
-        "validate",
-        "validator",
-        "exists",
-        "mongodb"
-    ],
-    "homepage": "https://github.com/CampbellSoftwareSolutions/mongoose-id-validator",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/CampbellSoftwareSolutions/mongoose-id-validator"
-    },
-    "license": "LGPL-3.0+",
-    "readmeFilename": "README.md",
-    "bugs": {
-        "url": "https://github.com/CampbellSoftwareSolutions/mongoose-id-validator/issues"
-    },
-    "engine": "node >= 0.4.0",
-    "main": "index.js",
-    "scripts": {
-        "test": "./node_modules/.bin/mocha -R spec"
-    },
-    "devDependencies": {
-        "mongoose": "*",
-        "async": "~0.2.9",
-        "should": "~3.0.1",
-        "mocha": "^2.2.1"
-    },
-    "dependencies": {
-        "clone": "^1.0.2",
-        "traverse": "^0.6.6"
-    }
+  "name": "mongoose-id-validator2",
+  "version": "0.0.0",
+  "description": "Mongoose plugin to validate that ObjectID references refer to objects that actually exist in the referenced collection",
+  "author": {
+    "name": "Martin Campbell",
+    "email": "martin@campbellsoftware.co.uk",
+    "url": "http://www.campbellsoftware.co.uk"
+  },
+  "keywords": [
+    "mongoose",
+    "objectid",
+    "id",
+    "validate",
+    "validator",
+    "exists",
+    "mongodb"
+  ],
+  "homepage": "https://github.com/CampbellSoftwareSolutions/mongoose-id-validator",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/CampbellSoftwareSolutions/mongoose-id-validator"
+  },
+  "license": "LGPL-3.0+",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/CampbellSoftwareSolutions/mongoose-id-validator/issues"
+  },
+  "engine": "node >= 0.4.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "mocha --timeout 10000 --exit dist/test/*.js",
+    "build": "tsc",
+    "prepublish": "tsc"
+  },
+  "devDependencies": {
+    "@types/async": "^3.2.12",
+    "@types/clone": "^2.1.1",
+    "@types/mocha": "^9.1.0",
+    "@types/should": "^13.0.0",
+    "@types/traverse": "^0.6.32",
+    "async": "~3.2.3",
+    "mocha": "^9.2.0",
+    "mongoose": "^6.1.9",
+    "should": "~13.2.3",
+    "ts-migrate": "^0.1.27",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "clone": "^2.1.2",
+    "traverse": "^0.6.6"
+  }
 }
