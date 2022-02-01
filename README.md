@@ -1,27 +1,19 @@
-# mongoose-id-validator
+# mongoose-id-validator2
 
-Provides a mongoose plugin that can be used to verify that a document which references
-other documents by their ID is referring to documents that actually exist.
-
-This plugin works by performing a count query for documents in the relevant collection with the
-ID specified in the document being validated. Note that the validation method is only executed if the ID
-value has been updated. This helps prevent unnecessary queries when saving a document if the ID has not been changed.
-
-However, please be aware that this will NOT catch any IDs that were valid at the time they were saved but the referenced
-document has subsequently been removed. You should have validation logic in your delete/remove code to handle this.
+This package is the typescript transformation of [mongoose-id-validator](https://github.com/CampbellSoftwareSolutions/mongoose-id-validator).
 
 ## Usage
 
 Install via NPM
 
 ```sh
-npm install mongoose-id-validator
+npm install mongoose-id-validator2
 ```
 
 Then you can use the plugin on your schemas
 
 ```js
-const idvalidator = require("mongoose-id-validator");
+import mongooseIdValidator from 'mongoose-id-validator2';
 
 const ManufacturerSchema = new Schema({
     name: String,
@@ -36,7 +28,9 @@ const CarSchema = new Schema({
         required: true,
     },
 });
-CarSchema.plugin(idvalidator);
+
+CarSchema.plugin(mongooseIdValidator);
+
 const Car = mongoose.model("Car", CarSchema);
 
 const ford = new ManufacturerSchema({ name: "Ford" });
@@ -98,7 +92,7 @@ bad ID value in the array of references but not which one it is.
 An example of this is below:
 
 ```js
-const idvalidator = require("mongoose-id-validator");
+import mongooseIdValidator from 'mongoose-id-validator2';
 
 const ColourSchema = new Schema({
     name: String,
@@ -114,7 +108,7 @@ const CarSchema = new Schema({
         },
     ],
 });
-CarSchema.plugin(idvalidator);
+CarSchema.plugin(mongooseIdValidator);
 const Car = mongoose.model("Car", CarSchema);
 
 const red = new Colour({ name: "Red" });
