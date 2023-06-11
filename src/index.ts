@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import traverse from "traverse";
-import clone from "clone";
+import mongoose from 'mongoose';
+import traverse from 'traverse';
+import clone from 'clone';
 
 declare class IdValidator {
   enabled: boolean;
@@ -25,7 +25,7 @@ IdValidator.prototype.disable = function () {
 IdValidator.prototype.validate = function (schema: any, options: any) {
   const self = this;
   options = options || {};
-  const message = options.message || "{PATH} references a non existing ID";
+  const message = options.message || '{PATH} references a non existing ID';
   const connection = options.connection || mongoose;
   const allowDuplicates = options.allowDuplicates || false;
 
@@ -39,7 +39,7 @@ IdValidator.prototype.validateSchema = function (
   schema: any,
   message: any,
   connection: any,
-  allowDuplicates: any
+  allowDuplicates: any,
 ) {
   const self = this;
   const caller = self instanceof IdValidator ? self : IdValidator.prototype;
@@ -79,8 +79,8 @@ IdValidator.prototype.validateSchema = function (
 
     const isArraySchemaType =
       (schemaType.caster && schemaType.caster.instance) ||
-      schemaType.instance === "Array" ||
-      schemaType["$isMongooseArray"] === true;
+      schemaType.instance === 'Array' ||
+      schemaType['$isMongooseArray'] === true;
     validateFunction = isArraySchemaType ? validateIdArray : validateId;
 
     if (refModelName || refModelPath) {
@@ -100,7 +100,7 @@ IdValidator.prototype.validateSchema = function (
 
                   conditionsCopy = clone(conditions);
                   traverse(conditionsCopy).forEach(function (this: any, value: any) {
-                    if (typeof value === "function") {
+                    if (typeof value === 'function') {
                       this.update(value.call(instance));
                     }
                   });
@@ -118,12 +118,12 @@ IdValidator.prototype.validateSchema = function (
                   conditionsCopy,
                   resolve,
                   reject,
-                  allowDuplicates
+                  allowDuplicates,
                 );
               }
               resolve(true);
               return;
-            }.bind(this)
+            }.bind(this),
           );
         },
         message: message,
@@ -137,12 +137,10 @@ function executeQuery(query: any, conditions: any, validateValue: any, resolve: 
     query.where(fieldName, conditions[fieldName]);
   }
   // Query.prototype.exec() no longer accepts a callback
-  query.exec(function (err: any, count: any) {
-    if (err) {
-      reject(err);
-      return;
-    }
+  query.then((count: any) => {
     return count === validateValue ? resolve(true) : resolve(false);
+  }).catch((err: any) => {
+    reject(err);
   });
 }
 
@@ -153,7 +151,7 @@ function validateId(
   value: any,
   conditions: any,
   resolve: any,
-  reject: any
+  reject: any,
 ) {
   if (value == null) {
     resolve(true);
@@ -176,7 +174,7 @@ function validateIdArray(
   conditions: any,
   resolve: any,
   reject: any,
-  allowDuplicates: any
+  allowDuplicates: any,
 ) {
   if (values == null || values.length == 0) {
     resolve(true);
@@ -193,7 +191,7 @@ function validateIdArray(
   }
 
   const refModel = connection.model(refModelName);
-  const query = refModel.countDocuments().where("_id")["in"](checkValues);
+  const query = refModel.countDocuments().where('_id')['in'](checkValues);
   const session = doc.$session && doc.$session();
   if (session) {
     query.session(session);
