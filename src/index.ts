@@ -136,6 +136,7 @@ function executeQuery(query: any, conditions: any, validateValue: any, resolve: 
   for (const fieldName in conditions) {
     query.where(fieldName, conditions[fieldName]);
   }
+  // Query.prototype.exec() no longer accepts a callback
   query.exec(function (err: any, count: any) {
     if (err) {
       reject(err);
